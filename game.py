@@ -29,6 +29,7 @@ class Game:
             self.player.move()  # перемещаем игрока
             if self.obstacle1.collides_with(self.player) or self.obstacle2.collides_with(
                     self.player) or self.obstacle3.collides_with(self.player):  # если игрок столкнулся с препятствием
+                self.running = False  # останавливаем игру
                 print("Game Over")  # выводим сообщение о конце игры
 
             self.screen.fill((255, 255, 255))  # заливаем экран белым цветом
