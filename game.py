@@ -34,7 +34,7 @@ class Game:
             self.screen.fill((255, 255, 255))  # заливаем экран белым цветом
             self.screen.blit(self.player.image, self.player.rect)  # отображаем игрока на экране
             self.screen.blit(self.obstacle1.image, self.obstacle1.rect)  # отображаем первое препятствие на экране
-            self.screen.blit(self.obstacle2.image, self.obstacle2.rect)  # отображаем первое препятствие на экране
-            self.screen.blit(self.obstacle3.image, self.obstacle3.rect)  # отображаем первое препятствие на экране
+            self.screen.blit(self.obstacle2.image, self.obstacle2.rect)  # отображаем второе препятствие на экране
+            self.screen.blit(self.obstacle3.image, self.obstacle3.rect)  # отображаем третье препятствие на экране
 
             pygame.display.flip()  # обновляем экран
