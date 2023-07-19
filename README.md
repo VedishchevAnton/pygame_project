@@ -16,3 +16,5 @@
 
 # Удачи!
 Наслаждайтесь игрой и удачи в избегании препятствий!
+Подробную информацию по библиотеке вы можете найти в документации :
+https://python-course.readthedocs.io/projects/elementary/en/latest/lessons/18-pygame.html
