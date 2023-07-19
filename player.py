@@ -4,7 +4,7 @@ import pygame
 class Player:
     """Класс игрок"""
     def __init__(self):
-        self.image = pygame.image.load("player.png")  # загрузка изображения игрока
+        self.image = pygame.image.load("image/player.png")  # загрузка изображения игрока
         self.rect = self.image.get_rect()  # получение прямоугольника, описывающего изображение игрока
         self.rect.center = (400, 300)  # установка центра прямоугольника в координаты (400, 300)
         self.speed = 5  # установка скорости игрока
