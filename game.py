@@ -4,7 +4,8 @@ from obstacle import Obstacle
 
 
 class Game:
-    def __init__(self):  # конструктор класса
+    def __init__(self):
+        # конструктор класса
         self.screen_width = 800  # задаем ширину экрана
         self.screen_height = 600  # задаем высоту экрана
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))  # создаем экран
@@ -12,11 +13,15 @@ class Game:
         self.clock = pygame.time.Clock()  # создаем объект Clock
         self.running = True  # устанавливаем флаг работы игры
         self.player = Player()  # создаем объект класса Player
-        self.obstacles = []
 
-        self.obstacle1 = Obstacle(150, 200)  # создаем 1 объект класса Obstacle
-        self.obstacle2 = Obstacle(550, 300)  # создаем 2 объект класса Obstacle
-        self.obstacle3 = Obstacle(250, 450)  # создаем 3 объект класса Obstacle
+        self.obstacle1 = Obstacle(150, 200, self.screen_width)  # создаем 1 объект класса Obstacle
+        self.obstacle2 = Obstacle(550, 300, self.screen_width)  # создаем 2 объект класса Obstacle
+        self.obstacle3 = Obstacle(250, 450, self.screen_width)  # создаем 3 объект класса Obstacle
+        self.obstacle_speed = 2  # задаем скорость препятствий
+
+        # Фон игры
+        background_image = pygame.image.load("image/background.png")
+        self.background_resized = pygame.transform.scale(background_image, (self.screen_width, self.screen_height))
 
     def run(self):
         """Метод запуска игры"""
@@ -32,7 +37,11 @@ class Game:
                 self.running = False  # останавливаем игру
                 print("Game Over")  # выводим сообщение о конце игры
 
-            self.screen.fill((255, 255, 255))  # заливаем экран белым цветом
+            self.obstacle1.move(self.obstacle_speed)  # двигаем первое препятствие
+            self.obstacle2.move(self.obstacle_speed)  # двигаем второе препятствие
+            self.obstacle3.move(self.obstacle_speed)  # двигаем третье препятствие
+
+            self.screen.blit(self.background_resized, (0, 0))  # отображаем фоновое изображение на экране
             self.screen.blit(self.player.image, self.player.rect)  # отображаем игрока на экране
             self.screen.blit(self.obstacle1.image, self.obstacle1.rect)  # отображаем первое препятствие на экране
             self.screen.blit(self.obstacle2.image, self.obstacle2.rect)  # отображаем второе препятствие на экране
