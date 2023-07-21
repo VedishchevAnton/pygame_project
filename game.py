@@ -1,6 +1,7 @@
 import pygame
 from player import Player
 from obstacle import Obstacle
+from target import Target
 
 
 class Game:
@@ -14,9 +15,10 @@ class Game:
         self.running = True  # устанавливаем флаг работы игры
         self.player = Player()  # создаем объект класса Player
 
-        self.obstacle1 = Obstacle(150, 200, self.screen_width)  # создаем 1 объект класса Obstacle
+        self.obstacle1 = Obstacle(150, 150, self.screen_width)  # создаем 1 объект класса Obstacle
         self.obstacle2 = Obstacle(550, 300, self.screen_width)  # создаем 2 объект класса Obstacle
-        self.obstacle3 = Obstacle(250, 450, self.screen_width)  # создаем 3 объект класса Obstacle
+        self.obstacle3 = Obstacle(250, 400, self.screen_width)  # создаем 3 объект класса Obstacle
+        self.target = Target(400, 600, self.screen_width)  # создаем объект класса Target
         self.obstacle_speed = 2  # задаем скорость препятствий
 
         # Фон игры
@@ -36,6 +38,9 @@ class Game:
                     self.player) or self.obstacle3.collides_with(self.player):  # если игрок столкнулся с препятствием
                 self.running = False  # останавливаем игру
                 print("Game Over")  # выводим сообщение о конце игры
+            elif self.target.collides_with(self.player):
+                self.running = False
+                print("You Win!!!!")
 
             self.obstacle1.move(self.obstacle_speed)  # двигаем первое препятствие
             self.obstacle2.move(self.obstacle_speed)  # двигаем второе препятствие
@@ -46,5 +51,6 @@ class Game:
             self.screen.blit(self.obstacle1.image, self.obstacle1.rect)  # отображаем первое препятствие на экране
             self.screen.blit(self.obstacle2.image, self.obstacle2.rect)  # отображаем второе препятствие на экране
             self.screen.blit(self.obstacle3.image, self.obstacle3.rect)  # отображаем третье препятствие на экране
+            self.screen.blit(self.target.image, self.target.rect)  # отображаем цель игрока на экране
 
             pygame.display.flip()  # обновляем экран
