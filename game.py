@@ -44,7 +44,6 @@ class Game:
                 self.running = False  # останавливаем игру
                 print("Game Over")  # выводим сообщение о конце игры
 
-
             self.obstacle1.move(self.obstacle_speed)  # двигаем первое препятствие
             self.obstacle2.move(self.obstacle_speed)  # двигаем второе препятствие
             self.obstacle3.move(self.obstacle_speed)  # двигаем третье препятствие
