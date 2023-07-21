@@ -6,7 +6,7 @@ class Player:
     def __init__(self):
         self.image = pygame.image.load("image/player.png")  # загрузка изображения игрока
         self.rect = self.image.get_rect()  # получение прямоугольника, описывающего изображение игрока
-        self.rect.center = (400, 30)  # установка центра прямоугольника в координаты (400, 300)
+        self.rect.center = (400, 30)  # установка игрока в точку старта
         self.speed = 5  # установка скорости игрока
 
     # метод для перемещения игрока
