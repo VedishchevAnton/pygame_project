@@ -1,10 +1,9 @@
 import pygame
-from player import Player
-from obstacle import Obstacle
-from target import Target
-
-import pygame
 import pygame.mixer
+
+from obstacle import Obstacle
+from player import Player
+from target import Target
 
 
 class Game:
@@ -13,7 +12,7 @@ class Game:
         self.screen_width = 800  # задаем ширину экрана
         self.screen_height = 600  # задаем высоту экрана
         self.screen = pygame.display.set_mode((self.screen_width, self.screen_height))  # создаем экран
-        pygame.display.set_caption("My Game")  # задаем заголовок окна
+        pygame.display.set_caption("Моя Игра")  # задаем заголовок окна
         self.clock = pygame.time.Clock()  # создаем объект Clock
         self.running = True  # устанавливаем флаг работы игры
         self.player = Player()  # создаем объект класса Player
@@ -32,13 +31,13 @@ class Game:
 
     @staticmethod
     def play_music():
-        """Метод реализации звуковой темы игры"""
+        """Метод для воспроизведения музыки в игре"""
         pygame.mixer.init()
         theme_music = pygame.mixer.Sound("music/theme.mp3")
         theme_music.play(-1)
 
     def run(self):
-        """Метод запуска игры"""
+        """Метод для запуска игры"""
         start_ticks = pygame.time.get_ticks()  # запоминаем время начала игры
         self.play_music()  # запускаем музыку
         while self.running:  # цикл игры
@@ -51,7 +50,7 @@ class Game:
             if self.obstacle1.collides_with(self.player) or self.obstacle2.collides_with(
                     self.player) or self.obstacle3.collides_with(self.player):  # если игрок столкнулся с препятствием
                 self.running = False  # останавливаем игру
-                print("Game Over")  # выводим сообщение о конце игры
+                print("Игра окончена")  # выводим сообщение о конце игры
 
             self.obstacle1.move(self.obstacle_speed)  # двигаем первое препятствие
             self.obstacle2.move(self.obstacle_speed)  # двигаем второе препятствие
@@ -76,5 +75,4 @@ class Game:
                 print(f'Поздравляю!!! Вы набрали {seconds} очков')
 
             pygame.display.flip()  # обновляем экран
-
 
