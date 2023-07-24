@@ -4,6 +4,7 @@ from obstacle import Obstacle
 from target import Target
 
 import pygame
+import pygame.mixer
 
 
 class Game:
@@ -29,9 +30,18 @@ class Game:
 
         self.score = 0  # переменная для хранения количества секунд, которые игрок прожил
 
+    @staticmethod
+    def play_music():
+        """Метод реализации звуковой темы игры"""
+        pygame.mixer.init()
+        theme_music = pygame.mixer.Sound("music/theme.mp3")
+        theme_music.play(-1)
+
     def run(self):
         """Метод запуска игры"""
         start_ticks = pygame.time.get_ticks()  # запоминаем время начала игры
+        pygame.mixer.init()  # инициализация звукового сопровождения
+        self.play_music()  # запускаем музыку
         while self.running:  # цикл игры
             self.clock.tick(60)  # устанавливаем частоту обновления экрана
             for event in pygame.event.get():  # обработка событий
@@ -67,3 +77,5 @@ class Game:
                 print(f'Поздравляю!!! Вы набрали {seconds} очков')
 
             pygame.display.flip()  # обновляем экран
+
+
