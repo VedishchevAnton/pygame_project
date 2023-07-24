@@ -40,7 +40,6 @@ class Game:
     def run(self):
         """Метод запуска игры"""
         start_ticks = pygame.time.get_ticks()  # запоминаем время начала игры
-        pygame.mixer.init()  # инициализация звукового сопровождения
         self.play_music()  # запускаем музыку
         while self.running:  # цикл игры
             self.clock.tick(60)  # устанавливаем частоту обновления экрана
