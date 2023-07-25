@@ -36,6 +36,12 @@ class Game:
         theme_music = pygame.mixer.Sound("music/theme.mp3")
         theme_music.play(-1)
 
+    def display_score(self, seconds):
+        """Метод для отображения количества секунд, которые игрок прожил"""
+        font = pygame.font.Font(None, 36)
+        text = font.render(f"Очки: {seconds}", True, (255, 255, 255))
+        self.screen.blit(text, (10, 10))
+
     def run(self):
         """Метод для запуска игры"""
         start_ticks = pygame.time.get_ticks()  # запоминаем время начала игры
@@ -65,9 +71,7 @@ class Game:
 
             # отображаем количество секунд, которые игрок прожил
             seconds = (pygame.time.get_ticks() - start_ticks) // 1000
-            font = pygame.font.Font(None, 36)
-            text = font.render(f"Очки: {seconds}", True, (255, 255, 255))
-            self.screen.blit(text, (10, 10))
+            self.display_score(seconds)
 
             if self.target.collides_with(self.player):
                 self.running = False
@@ -75,4 +79,3 @@ class Game:
                 print(f'Поздравляю!!! Вы набрали {seconds} очков')
 
             pygame.display.flip()  # обновляем экран
-
