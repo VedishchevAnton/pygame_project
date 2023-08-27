@@ -1,9 +1,8 @@
-import pygame
 from player import Player
 from obstacle import Obstacle
 from target import Target
-
 import pygame
+import pygame.mixer
 
 
 class Game:
@@ -29,9 +28,16 @@ class Game:
 
         self.score = 0  # переменная для хранения количества секунд, которые игрок прожил
 
+        # Загрузка звуков
+        pygame.mixer.init()
+        self.background_music = pygame.mixer.Sound("sound/background_music.mp3")
+        # self.game_over_sound = pygame.mixer.Sound("sound/game_over.wav")
+        # self.win_sound = pygame.mixer.Sound("sound/win.wav")
+
     def run(self):
         """Метод запуска игры"""
         start_ticks = pygame.time.get_ticks()  # запоминаем время начала игры
+        self.background_music.play(-1)  # запускаем фоновую музыку
         while self.running:  # цикл игры
             self.clock.tick(60)  # устанавливаем частоту обновления экрана
             for event in pygame.event.get():  # обработка событий
@@ -42,8 +48,9 @@ class Game:
             if self.obstacle1.collides_with(self.player) or self.obstacle2.collides_with(
                     self.player) or self.obstacle3.collides_with(self.player):  # если игрок столкнулся с препятствием
                 self.running = False  # останавливаем игру
+                self.background_music.stop()  # останавливаем фоновую музыку
+                self.game_over_sound.play()  # проигрываем звук проигрыша
                 print("Game Over")  # выводим сообщение о конце игры
-
 
             self.obstacle1.move(self.obstacle_speed)  # двигаем первое препятствие
             self.obstacle2.move(self.obstacle_speed)  # двигаем второе препятствие
@@ -64,7 +71,11 @@ class Game:
 
             if self.target.collides_with(self.player):
                 self.running = False
+                self.background_music.stop()  # останавливаем фоновую музыку
+                self.win_sound.play()  # проигрываем звук победы
                 print("Вы выиграли!!!!")
                 print(f'Поздравляю!!! Вы набрали {seconds} очков')
 
             pygame.display.flip()  # обновляем экран
+
+        pygame.mixer.quit()  # останавливаем звуковую систему
